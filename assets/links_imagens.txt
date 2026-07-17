@@ -1,0 +1,79 @@
+============================================================
+LINKS E SUGESTÕES DE MÍDIA — A SAGA DE PETER PARKER
+============================================================
+
+Como usar:
+1. Baixe as imagens (ou copie os links diretos) e salve na pasta assets/.
+2. No css/style.css, adicione a imagem como fundo do slide, por exemplo:
+     .slide__bg[data-bg="capa"] { background-image: url('../assets/capa.jpg'); }
+   (Repita para: homecoming, farfromhome, nowayhome, brandnewday.)
+   Depois, remova a <div class="bg-placeholder"> correspondente no index.html.
+3. Para os vídeos, procure no YouTube as buscas sugeridas abaixo (versões
+   DUBLADAS em PT-BR), copie o ID do vídeo e monte o iframe no index.html:
+     <iframe class="video-box__frame"
+             data-src="https://www.youtube.com/embed/COLOQUE_O_ID_AQUI"
+             title="Descrição do clipe" allowfullscreen></iframe>
+   Importante: use data-src (não src) — o script carrega o vídeo só quando o
+   slide abre e pausa automaticamente ao trocar de slide.
+
+------------------------------------------------------------
+SLIDE 1 — CAPA
+------------------------------------------------------------
+Imagem de fundo (arquivo sugerido: assets/capa.jpg)
+- Busca no Google Imagens: "Spider-Man No Way Home poster hd wallpaper"
+- Busca alternativa: "Tom Holland Spider-Man swinging wallpaper 4k"
+- Fontes boas para wallpapers oficiais: wallpapers.com, wallpaperaccess.com,
+  peakpx.com (procure por "Spider-Man Tom Holland")
+
+------------------------------------------------------------
+SLIDE 2 — DE VOLTA AO LAR (2017)
+------------------------------------------------------------
+Imagem de fundo (arquivo sugerido: assets/homecoming.jpg)
+- Busca: "Spider-Man Homecoming homemade suit scene hd"
+- Busca alternativa: "Spider-Man Homecoming Washington Monument scene"
+
+Vídeo dublado (YouTube):
+- Busca: "Homem-Aranha De Volta ao Lar Peter preso nos escombros dublado"
+- Busca alternativa: "Homem Aranha levantando escombros cena dublada"
+
+------------------------------------------------------------
+SLIDE 3 — LONGE DE CASA (2019)
+------------------------------------------------------------
+Imagem de fundo (arquivo sugerido: assets/farfromhome.jpg)
+- Busca: "Spider-Man Far From Home Peter and MJ bridge scene hd"
+- Busca alternativa: "Spider-Man Far From Home Mysterio illusion scene wallpaper"
+
+Vídeo dublado (YouTube):
+- Busca: "Homem-Aranha Longe de Casa beijo Peter e MJ dublado"
+- Busca alternativa: "Homem-Aranha Longe de Casa ilusões do Mysterio cena dublada"
+
+------------------------------------------------------------
+SLIDE 4 — SEM VOLTA PARA CASA (2021)
+------------------------------------------------------------
+Imagem de fundo (arquivo sugerido: assets/nowayhome.jpg)
+- Busca: "Spider-Man No Way Home three spider-men wallpaper 4k"
+- Busca alternativa: "Doctor Strange spell No Way Home scene hd"
+
+Vídeo dublado (YouTube):
+- Busca: "Homem-Aranha Sem Volta Para Casa despedida MJ final dublado"
+- Busca alternativa: "três Homens-Aranha juntos cena dublada Sem Volta Para Casa"
+
+------------------------------------------------------------
+SLIDE 5 — BRAND NEW DAY (O FUTURO)
+------------------------------------------------------------
+Imagem de fundo (arquivo sugerido: assets/brandnewday.jpg)
+- Busca: "Spider-Man No Way Home ending swinging snow scene hd"
+- Busca alternativa: "Spider-Man Brand New Day concept art"
+- Busca alternativa: "Spider-Man classic suit final scene No Way Home wallpaper"
+
+Vídeo opcional (YouTube):
+- Busca: "Spider-Man Brand New Day teaser trailer legendado"
+
+------------------------------------------------------------
+DICAS FINAIS
+------------------------------------------------------------
+- Prefira imagens em alta resolução (mínimo 1920x1080) para não ficarem
+  pixeladas em tela cheia.
+- Se o vídeo dublado não existir como clipe isolado, uma versão legendada
+  também funciona — é só trocar o texto do rótulo no index.html.
+- Teste no celular também: o site é responsivo e aceita swipe para os lados.

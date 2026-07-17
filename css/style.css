@@ -1,0 +1,439 @@
+/* ============================================================
+   TEMA: Homem-Aranha — Vermelho vibrante, Azul profundo,
+   Branco e Preto/Cinza escuro para contraste.
+   ============================================================ */
+
+:root {
+  --spider-red: #e62429;
+  --spider-red-dark: #a4161a;
+  --spider-blue: #0b1e5b;
+  --spider-blue-deep: #060f2e;
+  --white: #ffffff;
+  --gray-dark: #14141b;
+  --gray-mid: #2a2a35;
+
+  --font-body: 'Montserrat', system-ui, sans-serif;
+  --font-display: 'Bangers', 'Montserrat', cursive;
+
+  --transition-slide: 700ms cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ---------- Reset básico ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* cada slide ocupa a tela inteira; sem scroll da página */
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--gray-dark);
+  color: var(--white);
+}
+
+/* ============================================================
+   ESTRUTURA DOS SLIDES
+   ============================================================ */
+
+.slideshow {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  opacity: 0;
+  transform: translateX(6%) scale(0.98);
+  pointer-events: none;
+  transition: opacity var(--transition-slide), transform var(--transition-slide);
+}
+
+.slide.is-active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Slide saindo pela esquerda (controlado via JS) */
+.slide.is-leaving-left {
+  transform: translateX(-6%) scale(0.98);
+}
+
+/* ---------- Fundo do slide ---------- */
+.slide__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--spider-blue-deep);
+  z-index: 0;
+}
+
+/* Placeholder visível até você trocar pela imagem real */
+.bg-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem 2rem 5rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(230, 36, 41, 0.25), transparent 55%),
+    radial-gradient(ellipse at 80% 70%, rgba(11, 30, 91, 0.8), transparent 60%),
+    linear-gradient(160deg, var(--gray-dark), var(--spider-blue-deep));
+}
+
+/* Overlay para garantir a leitura do texto sobre a imagem */
+.slide__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(6, 15, 46, 0.92) 0%,
+    rgba(6, 15, 46, 0.7) 45%,
+    rgba(230, 36, 41, 0.25) 100%
+  );
+}
+
+.slide__overlay--dark {
+  background: linear-gradient(
+    100deg,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(6, 15, 46, 0.8) 55%,
+    rgba(230, 36, 41, 0.3) 100%
+  );
+}
+
+/* ---------- Conteúdo ---------- */
+.slide__content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  padding: 4rem 3rem 4rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.slide__content--center {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  align-items: center;
+}
+
+/* Animação de entrada do conteúdo, disparada quando o slide ativa */
+.slide.is-active .slide__content > * {
+  animation: rise-in 700ms both;
+}
+
+.slide.is-active .slide__content > *:nth-child(2) { animation-delay: 120ms; }
+.slide.is-active .slide__content > *:nth-child(3) { animation-delay: 240ms; }
+.slide.is-active .slide__content > *:nth-child(4) { animation-delay: 360ms; }
+.slide.is-active .slide__content > *:nth-child(5) { animation-delay: 480ms; }
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   TIPOGRAFIA
+   ============================================================ */
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--spider-red);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+}
+
+.title--hero {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.title__accent {
+  color: var(--spider-red);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+}
+
+.subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 600;
+  max-width: 40ch;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.text {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.text strong {
+  color: #ffb3b5;
+}
+
+.text--highlight {
+  border-left: 4px solid var(--spider-red);
+  padding-left: 1rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--spider-red), var(--spider-red-dark));
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 2.4rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(230, 36, 41, 0.45);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(230, 36, 41, 0.6);
+}
+
+.btn--pulse {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 36, 41, 0.55); }
+  50%      { box-shadow: 0 0 0 18px rgba(230, 36, 41, 0); }
+}
+
+/* ============================================================
+   VÍDEOS (iframes do YouTube dublados)
+   ============================================================ */
+
+.video-box {
+  margin-top: 0.4rem;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+}
+
+.video-box__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.video-box__frame,
+.video-box__placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+.video-box__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+}
+
+/* ============================================================
+   NAVEGAÇÃO — setas flutuantes e indicadores
+   ============================================================ */
+
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.3rem;
+  color: var(--white);
+  background: rgba(230, 36, 41, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease, opacity 200ms ease;
+}
+
+.nav-arrow:hover {
+  background: var(--spider-red);
+  transform: translateY(-50%) scale(1.12);
+}
+
+.nav-arrow--prev { left: 1.2rem; }
+.nav-arrow--next { right: 1.2rem; }
+
+.nav-arrow[disabled] {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Bolinhas indicadoras (uma por slide) */
+.dots {
+  position: fixed;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.dots__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 250ms ease, transform 250ms ease;
+}
+
+.dots__dot:hover {
+  transform: scale(1.25);
+}
+
+.dots__dot.is-active {
+  background: var(--spider-red);
+  border-color: var(--spider-red);
+  transform: scale(1.25);
+}
+
+/* ============================================================
+   DETALHE DECORATIVO — teias nos cantos
+   ============================================================ */
+
+.web-corner {
+  position: fixed;
+  width: 180px;
+  height: 180px;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.18;
+  background:
+    repeating-radial-gradient(circle at 0 0, transparent 0 18px, var(--white) 18px 19px),
+    repeating-conic-gradient(from 0deg at 0 0, var(--white) 0deg 1deg, transparent 1deg 15deg);
+}
+
+.web-corner--tl {
+  top: 0;
+  left: 0;
+}
+
+.web-corner--br {
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .slide__content {
+    max-width: 100%;
+    padding: 4.5rem 1.4rem 5.5rem;
+    gap: 1rem;
+  }
+
+  .slide__overlay,
+  .slide__overlay--dark {
+    background: linear-gradient(
+      180deg,
+      rgba(6, 15, 46, 0.9) 0%,
+      rgba(6, 15, 46, 0.75) 60%,
+      rgba(230, 36, 41, 0.35) 100%
+    );
+  }
+
+  .nav-arrow {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.05rem;
+  }
+
+  .nav-arrow--prev { left: 0.5rem; }
+  .nav-arrow--next { right: 0.5rem; }
+
+  .web-corner {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Acessibilidade: respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .slide.is-active .slide__content > *,
+  .btn--pulse {
+    animation: none !important;
+    transition: opacity 300ms ease !important;
+  }
+}

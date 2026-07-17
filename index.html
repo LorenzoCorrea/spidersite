@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Saga de Peter Parker (Até Agora...)</title>
+  <meta name="description" content="Um guia exclusivo para se preparar para Spider-Man: Brand New Day.">
+
+  <!-- Fontes: Montserrat (textos) + Bangers (títulos estilo quadrinhos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Teia decorativa fixa nos cantos -->
+  <div class="web-corner web-corner--tl" aria-hidden="true"></div>
+  <div class="web-corner web-corner--br" aria-hidden="true"></div>
+
+  <main id="slideshow" class="slideshow" aria-live="polite">
+
+    <!-- ============================================================
+         SLIDE 1 — CAPA (Introdução)
+         ============================================================ -->
+    <section class="slide slide--cover is-active" id="slide-1" data-slide="1">
+      <div class="slide__bg" data-bg="capa">
+        <!-- Substitua pela imagem de capa (veja assets/links_imagens.txt) -->
+        <div class="bg-placeholder">📸 Imagem de capa: Homem-Aranha balançando entre prédios</div>
+      </div>
+      <div class="slide__overlay"></div>
+
+      <div class="slide__content slide__content--center">
+        <p class="eyebrow">Edição especial &amp; exclusiva 🕷️❤️</p>
+        <h1 class="title title--hero">A Saga de Peter Parker<br><span class="title__accent">(Até Agora...)</span></h1>
+        <p class="subtitle">
+          Um guia exclusivo feito com amor para preparar você para
+          <strong>Spider-Man: Brand New Day</strong>.
+        </p>
+        <button class="btn btn--pulse" id="startBtn" type="button">
+          Começar a Aventura 🕸️
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 2 — HOMEM-ARANHA: DE VOLTA AO LAR (2017)
+         ============================================================ -->
+    <section class="slide" id="slide-2" data-slide="2">
+      <div class="slide__bg" data-bg="homecoming">
+        <!-- Substitua pela imagem: Peter com o traje caseiro / Monumento de Washington -->
+        <div class="bg-placeholder">📸 Imagem: Peter com o traje caseiro ou no Monumento de Washington</div>
+      </div>
+      <div class="slide__overlay"></div>
+
+      <div class="slide__content">
+        <p class="eyebrow">Filme 1 • 2017</p>
+        <h2 class="title">Homem-Aranha:<br><span class="title__accent">De Volta ao Lar</span></h2>
+        <p class="text">
+          O garoto do Queens tentando provar seu valor para o Tony Stark.
+          Ele enfrenta o <strong>Abutre</strong>, descobre que o vilão é o pai do
+          seu date <em>(que climão 😬)</em>, e aprende a lição mais importante:
+          <strong>“Se você não é nada sem o traje, então não deveria tê-lo.”</strong>
+        </p>
+
+        <div class="video-box">
+          <p class="video-box__label">🎬 Clipe (dublado): Peter preso nos escombros</p>
+          <!--
+            Cole aqui o iframe do YouTube (versão DUBLADA em PT-BR).
+            Use data-src em vez de src para o vídeo só carregar quando o slide abrir.
+            Exemplo:
+            <iframe class="video-box__frame" data-src="https://www.youtube.com/embed/VIDEO_ID" title="Peter preso nos escombros" allowfullscreen></iframe>
+          -->
+          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 3 — HOMEM-ARANHA: LONGE DE CASA (2019)
+         ============================================================ -->
+    <section class="slide" id="slide-3" data-slide="3">
+      <div class="slide__bg" data-bg="farfromhome">
+        <!-- Substitua pela imagem: Peter e MJ na Europa / ilusões do Mysterio -->
+        <div class="bg-placeholder">📸 Imagem: Peter e MJ na Europa ou as ilusões do Mysterio</div>
+      </div>
+      <div class="slide__overlay"></div>
+
+      <div class="slide__content">
+        <p class="eyebrow">Filme 2 • 2019</p>
+        <h2 class="title">Homem-Aranha:<br><span class="title__accent">Longe de Casa</span></h2>
+        <p class="text">
+          Férias na Europa! 🇮🇹 Peter só queria se declarar para a <strong>MJ</strong>,
+          mas o <strong>Mysterio</strong> enganou todo mundo. Aqui a MJ descobre a
+          identidade dele <em>(finalmente!)</em> — e no fim, o mundo inteiro também,
+          graças ao <strong>J. Jonah Jameson</strong>. 📰
+        </p>
+
+        <div class="video-box">
+          <p class="video-box__label">🎬 Clipe (dublado): O beijo de Peter e MJ ou as ilusões do Mysterio</p>
+          <!--
+            Cole aqui o iframe do YouTube (versão DUBLADA em PT-BR), usando data-src.
+          -->
+          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 4 — HOMEM-ARANHA: SEM VOLTA PARA CASA (2021)
+         ============================================================ -->
+    <section class="slide" id="slide-4" data-slide="4">
+      <div class="slide__bg" data-bg="nowayhome">
+        <!-- Substitua pela imagem: os três Aranhas juntos / feitiço do Doutor Estranho -->
+        <div class="bg-placeholder">📸 Imagem: Os três Homens-Aranha juntos ou o feitiço do Doutor Estranho</div>
+      </div>
+      <div class="slide__overlay"></div>
+
+      <div class="slide__content">
+        <p class="eyebrow">Filme 3 • 2021</p>
+        <h2 class="title">Homem-Aranha:<br><span class="title__accent">Sem Volta para Casa</span></h2>
+        <p class="text">
+          O multiverso quebra! 🌀 Para salvar o futuro dos amigos, Peter pede ajuda
+          ao <strong>Doutor Estranho</strong>. Vilões do passado voltam,
+          <strong>Tobey e Andrew aparecem</strong> <em>(o surto no cinema!)</em>, e no
+          final Peter toma a decisão mais difícil de todas:
+          <strong>todos esquecem quem é Peter Parker</strong>. Inclusive a MJ e o Ned. 💔
+        </p>
+
+        <div class="video-box">
+          <p class="video-box__label">🎬 Clipe (dublado): A despedida da MJ ou o abraço dos três Aranhas</p>
+          <!--
+            Cole aqui o iframe do YouTube (versão DUBLADA em PT-BR), usando data-src.
+          -->
+          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 5 — O FUTURO: SPIDER-MAN: BRAND NEW DAY
+         ============================================================ -->
+    <section class="slide slide--finale" id="slide-5" data-slide="5">
+      <div class="slide__bg" data-bg="brandnewday">
+        <!-- Substitua pela imagem: traje clássico balançando na neve (final do 3º filme) -->
+        <div class="bg-placeholder">📸 Imagem: Peter com o traje clássico balançando na neve</div>
+      </div>
+      <div class="slide__overlay slide__overlay--dark"></div>
+
+      <div class="slide__content">
+        <p class="eyebrow">O Futuro • Em breve nos cinemas</p>
+        <h2 class="title">Spider-Man:<br><span class="title__accent">Brand New Day</span></h2>
+        <p class="text">
+          Onde estamos agora? <strong>Peter está completamente sozinho.</strong>
+          Nenhuma tecnologia Stark, nenhum Vingador para salvar o dia, e a MJ
+          não se lembra dele. É um recomeço do zero — o verdadeiro
+          <strong>“Amigão da Vizinhança”</strong>. 🏙️
+        </p>
+        <p class="text text--highlight">
+          O que esperar? Um Peter mais maduro, um traje clássico dos quadrinhos,
+          novos vilões das ruas de Nova York... e, quem sabe, um reencontro que
+          vai fazer a gente chorar de novo. 🥹
+        </p>
+        <button class="btn btn--pulse btn--finale" id="finaleBtn" type="button">
+          Estou pronta para o cinema! 🍿
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       NAVEGAÇÃO
+       ============================================================ -->
+  <button class="nav-arrow nav-arrow--prev" id="prevBtn" type="button" aria-label="Slide anterior">&#10094;</button>
+  <button class="nav-arrow nav-arrow--next" id="nextBtn" type="button" aria-label="Próximo slide">&#10095;</button>
+
+  <nav class="dots" id="dots" aria-label="Navegação dos slides"></nav>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
