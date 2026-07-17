@@ -1,266 +1,266 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Saga de Peter Parker (Até Agora...)</title>
-  <meta name="description" content="Um guia exclusivo para se preparar para Spider-Man: Brand New Day.">
+<!DOCTYPE html> <!-- Avisa ao navegador que este documento usa HTML5 (a versão moderna do HTML) -->
+<html lang="pt-BR"> <!-- Abre o documento HTML e informa que o idioma é português do Brasil (ajuda leitores de tela e o tradutor do navegador) -->
+<head> <!-- Abre o cabeçalho: configurações e recursos da página que NÃO aparecem na tela -->
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8, garantindo que acentos e emojis apareçam corretamente -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Faz a página se adaptar à largura da tela do celular, sem zoom estranho -->
+  <title>A Saga de Peter Parker (Até Agora...)</title> <!-- Texto que aparece na aba do navegador -->
+  <meta name="description" content="Um guia exclusivo para se preparar para Spider-Man: Brand New Day."> <!-- Descrição da página usada por buscadores e ao compartilhar o link -->
 
   <!-- Fontes: Montserrat (textos) + Bangers (títulos estilo quadrinhos) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Abre a conexão com o servidor do Google Fonts antecipadamente (a fonte carrega mais rápido) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Mesma coisa para o servidor que entrega os arquivos das fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet"> <!-- Baixa as duas fontes: Bangers e Montserrat (nos pesos 400, 600 e 800) -->
 
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <link rel="stylesheet" href="css/style.css"> <!-- Conecta o arquivo de estilos: toda a aparência da página vem daqui -->
+</head> <!-- Fecha o cabeçalho -->
+<body> <!-- Abre o corpo: tudo daqui para baixo é o que aparece na tela -->
 
-  <!-- Teia decorativa fixa nos cantos -->
-  <div class="web-corner web-corner--tl" aria-hidden="true"></div>
-  <div class="web-corner web-corner--br" aria-hidden="true"></div>
+  <!-- Teia decorativa fixa nos cantos (são só divs vazias; o desenho da teia é feito no CSS) -->
+  <div class="web-corner web-corner--tl" aria-hidden="true"></div> <!-- Teia do canto superior esquerdo; aria-hidden esconde dos leitores de tela (é só enfeite) -->
+  <div class="web-corner web-corner--br" aria-hidden="true"></div> <!-- Teia do canto inferior direito -->
 
-  <main id="slideshow" class="slideshow" aria-live="polite">
+  <main id="slideshow" class="slideshow" aria-live="polite"> <!-- Container principal que envolve todos os slides; aria-live avisa leitores de tela quando o conteúdo muda -->
 
     <!-- ============================================================
-         SLIDE 1 — CAPA (Introdução)
+         SLIDE 1 : CAPA (Introdução)
          ============================================================ -->
-    <section class="slide slide--cover is-active" id="slide-1" data-slide="1">
-      <div class="slide__bg" data-bg="capa">
+    <section class="slide slide--cover is-active" id="slide-1" data-slide="1"> <!-- Slide da capa; "is-active" faz ele começar visível; os outros começam escondidos -->
+      <div class="slide__bg" data-bg="capa"> <!-- Camada de fundo do slide; o data-bg identifica qual imagem usar no CSS -->
         <!-- Substitua pela imagem de capa (veja assets/links_imagens.txt) -->
-        <div class="bg-placeholder">📸 Imagem de capa: Homem-Aranha balançando entre prédios</div>
-      </div>
-      <div class="slide__overlay"></div>
+        <div class="bg-placeholder">📸 Imagem de capa: Homem-Aranha balançando entre prédios</div> <!-- Aviso temporário que some quando você colocar a imagem real -->
+      </div> <!-- Fecha a camada de fundo -->
+      <div class="slide__overlay"></div> <!-- Camada escura semitransparente sobre a imagem, para o texto ficar legível -->
 
-      <div class="slide__content slide__content--center">
-        <p class="eyebrow">Edição especial &amp; exclusiva 🕷️❤️</p>
-        <h1 class="title title--hero">A Saga de Peter Parker<br><span class="title__accent">(Até Agora...)</span></h1>
-        <p class="subtitle">
+      <div class="slide__content slide__content--center"> <!-- Coluna de conteúdo; a variação "--center" centraliza tudo (só a capa usa) -->
+        <p class="eyebrow">Edição especial &amp; exclusiva 🕷️❤️</p> <!-- Rotulozinho em maiúsculas acima do título; &amp; é o jeito correto de escrever "&" em HTML -->
+        <h1 class="title title--hero">A Saga de Peter Parker<br><span class="title__accent">(Até Agora...)</span></h1> <!-- Título principal da página (h1); <br> quebra a linha; o <span> pinta a segunda parte de vermelho -->
+        <p class="subtitle"> <!-- Abre o subtítulo da capa -->
           Um guia exclusivo feito com amor para preparar você para
-          <strong>Spider-Man: Brand New Day</strong>.
-        </p>
-        <button class="btn btn--pulse" id="startBtn" type="button">
+          <strong>Spider-Man: Brand New Day</strong>. <!-- <strong> deixa o nome do filme em negrito/destaque -->
+        </p> <!-- Fecha o subtítulo -->
+        <button class="btn btn--pulse" id="startBtn" type="button"> <!-- Botão pulsante da capa; o id "startBtn" é usado pelo JavaScript para avançar ao clicar -->
           Começar a Aventura 🕸️
-        </button>
-      </div>
-    </section>
+        </button> <!-- Fecha o botão -->
+      </div> <!-- Fecha a coluna de conteúdo -->
+    </section> <!-- Fecha o slide 1 -->
 
     <!-- ============================================================
-         SLIDE 2 — HOMEM-ARANHA: DE VOLTA AO LAR (2017)
+         SLIDE 2 : HOMEM-ARANHA: DE VOLTA AO LAR (2017)
          ============================================================ -->
-    <section class="slide" id="slide-2" data-slide="2">
-      <div class="slide__bg" data-bg="homecoming">
+    <section class="slide" id="slide-2" data-slide="2"> <!-- Slide do primeiro filme; sem "is-active", começa invisível até o JS ativá-lo -->
+      <div class="slide__bg" data-bg="homecoming"> <!-- Fundo deste slide; troque a imagem apontando para data-bg="homecoming" no CSS -->
         <!-- Substitua pela imagem: Peter com o traje caseiro / Monumento de Washington -->
-        <div class="bg-placeholder">📸 Imagem: Peter com o traje caseiro ou no Monumento de Washington</div>
-      </div>
-      <div class="slide__overlay"></div>
+        <div class="bg-placeholder">📸 Imagem: Peter com o traje caseiro ou no Monumento de Washington</div> <!-- Aviso temporário até a imagem real -->
+      </div> <!-- Fecha o fundo -->
+      <div class="slide__overlay"></div> <!-- Camada de escurecimento para leitura -->
 
-      <div class="slide__content">
-        <p class="eyebrow">Filme 1 • 2017</p>
-        <h2 class="title">Homem-Aranha:<br><span class="title__accent">De Volta ao Lar</span></h2>
+      <div class="slide__content"> <!-- Coluna de conteúdo alinhada à esquerda (padrão dos slides de filme) -->
+        <p class="eyebrow">Filme 1 • 2017</p> <!-- Etiqueta com o número e o ano do filme -->
+        <h2 class="title">Homem-Aranha:<br><span class="title__accent">De Volta ao Lar</span></h2> <!-- Título do slide (h2, pois o h1 é só o da capa); o subtítulo do filme fica em vermelho -->
 
-        <div class="acts">
-          <div class="act">
-            <h3 class="act__label">🕸️ Início</h3>
-            <p class="text">
-              Depois de lutar ao lado do Tony Stark em <em>Guerra Civil</em>, Peter volta
+        <div class="acts"> <!-- Container que agrupa os três blocos da história: Início, Meio e Fim -->
+          <div class="act"> <!-- Bloco 1: o começo do filme -->
+            <h3 class="act__label">🕸️ Início</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Parágrafo com o resumo do início; as linhas até </p> são o texto exibido na tela -->
+              Depois de lutar ao lado do Tony Stark em <em>Guerra Civil</em>, Peter volta <!-- <em> deixa o nome do outro filme em itálico -->
               para o Queens achando que virou Vingador... mas a missão nunca chega. Ele fica
               na rotina do colégio com o Ned, apaixonado pela Liz, enquanto o
-              <strong>Abutre</strong> — um trabalhador comum que perdeu tudo para o governo —
+              <strong>Abutre</strong> — um trabalhador comum que perdeu tudo para o governo — <!-- <strong> destaca o nome do vilão -->
               começa a vender armas feitas com tecnologia alienígena.
-            </p>
-          </div>
-          <div class="act">
-            <h3 class="act__label">🕸️ Meio</h3>
-            <p class="text">
+            </p> <!-- Fecha o parágrafo do início -->
+          </div> <!-- Fecha o bloco Início -->
+          <div class="act"> <!-- Bloco 2: o meio do filme -->
+            <h3 class="act__label">🕸️ Meio</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do meio do filme -->
               Ansioso para provar seu valor, Peter caça os traficantes por conta própria e
               quase afunda uma balsa cheia de gente. Tony confisca o traje com a frase que
-              define o filme: <strong>“Se você não é nada sem o traje, então não deveria
+              define o filme: <strong>“Se você não é nada sem o traje, então não deveria <!-- Destaque para a frase mais importante do filme -->
               tê-lo.”</strong> E na noite do baile, a bomba: o pai da Liz, que abre a porta
-              sorrindo, <strong>é o Abutre</strong>. <em>(Que climão no carro 😬)</em>
-            </p>
-          </div>
-          <div class="act">
-            <h3 class="act__label">🕸️ Fim</h3>
-            <p class="text">
+              sorrindo, <strong>é o Abutre</strong>. <em>(Que climão no carro 😬)</em> <!-- Comentário divertido em itálico -->
+            </p> <!-- Fecha o parágrafo do meio -->
+          </div> <!-- Fecha o bloco Meio -->
+          <div class="act"> <!-- Bloco 3: o final do filme -->
+            <h3 class="act__label">🕸️ Fim</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do final do filme -->
               Só com o traje caseiro, Peter fica soterrado nos escombros, se levanta sozinho
               — a cena mais icônica dele — e impede o roubo do avião dos Vingadores, salvando
               o vilão do próprio incêndio. Recusa o convite para ser Vingador, ganha o traje
               de volta... e a Tia May descobre o segredo no último segundo. 😱
-            </p>
-          </div>
-        </div>
+            </p> <!-- Fecha o parágrafo do fim -->
+          </div> <!-- Fecha o bloco Fim -->
+        </div> <!-- Fecha o container dos três atos -->
 
-        <div class="video-box">
-          <p class="video-box__label">🎬 Clipe (dublado): Peter preso nos escombros</p>
+        <div class="video-box"> <!-- Caixa que emoldura o vídeo do YouTube -->
+          <p class="video-box__label">🎬 Clipe (dublado): Peter preso nos escombros</p> <!-- Rótulo dizendo qual cena é o clipe -->
           <!--
             Cole aqui o iframe do YouTube (versão DUBLADA em PT-BR).
             Use data-src em vez de src para o vídeo só carregar quando o slide abrir.
             Exemplo:
             <iframe class="video-box__frame" data-src="https://www.youtube.com/embed/VIDEO_ID" title="Peter preso nos escombros" allowfullscreen></iframe>
           -->
-          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div>
-        </div>
-      </div>
-    </section>
+          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div> <!-- Retângulo temporário no lugar do vídeo -->
+        </div> <!-- Fecha a caixa de vídeo -->
+      </div> <!-- Fecha a coluna de conteúdo -->
+    </section> <!-- Fecha o slide 2 -->
 
     <!-- ============================================================
-         SLIDE 3 — HOMEM-ARANHA: LONGE DE CASA (2019)
+         SLIDE 3 : HOMEM-ARANHA: LONGE DE CASA (2019)
          ============================================================ -->
-    <section class="slide" id="slide-3" data-slide="3">
-      <div class="slide__bg" data-bg="farfromhome">
+    <section class="slide" id="slide-3" data-slide="3"> <!-- Slide do segundo filme -->
+      <div class="slide__bg" data-bg="farfromhome"> <!-- Fundo deste slide; identificado por data-bg="farfromhome" -->
         <!-- Substitua pela imagem: Peter e MJ na Europa / ilusões do Mysterio -->
-        <div class="bg-placeholder">📸 Imagem: Peter e MJ na Europa ou as ilusões do Mysterio</div>
-      </div>
-      <div class="slide__overlay"></div>
+        <div class="bg-placeholder">📸 Imagem: Peter e MJ na Europa ou as ilusões do Mysterio</div> <!-- Aviso temporário até a imagem real -->
+      </div> <!-- Fecha o fundo -->
+      <div class="slide__overlay"></div> <!-- Camada de escurecimento para leitura -->
 
-      <div class="slide__content">
-        <p class="eyebrow">Filme 2 • 2019</p>
-        <h2 class="title">Homem-Aranha:<br><span class="title__accent">Longe de Casa</span></h2>
+      <div class="slide__content"> <!-- Coluna de conteúdo do slide -->
+        <p class="eyebrow">Filme 2 • 2019</p> <!-- Etiqueta com número e ano -->
+        <h2 class="title">Homem-Aranha:<br><span class="title__accent">Longe de Casa</span></h2> <!-- Título do slide com o subtítulo em vermelho -->
 
-        <div class="acts">
-          <div class="act">
-            <h3 class="act__label">🕸️ Início</h3>
-            <p class="text">
+        <div class="acts"> <!-- Os três blocos da história deste filme -->
+          <div class="act"> <!-- Bloco 1: início -->
+            <h3 class="act__label">🕸️ Início</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do início do filme -->
               O mundo ainda chora a morte do Tony, e Peter só quer uma coisa: as férias na
               Europa com a turma e um plano de 7 etapas para <strong>se declarar para a MJ
-              em Paris</strong>. 🇫🇷 Mas Nick Fury invade a viagem: monstros elementais
-              atacam, e surge <strong>Quentin Beck, o "Mysterio"</strong>, um suposto herói
-              de outra Terra. Peter ainda herda os óculos <strong>EDITH</strong>, com todo o
+              em Paris</strong>. 🇫🇷 Mas Nick Fury invade a viagem: monstros elementais <!-- Destaque para o objetivo romântico do Peter -->
+              atacam, e surge <strong>Quentin Beck, o "Mysterio"</strong>, um suposto herói <!-- Destaque para a apresentação do vilão -->
+              de outra Terra. Peter ainda herda os óculos <strong>EDITH</strong>, com todo o <!-- Destaque para a herança do Tony -->
               arsenal do Tony.
-            </p>
-          </div>
-          <div class="act">
-            <h3 class="act__label">🕸️ Meio</h3>
-            <p class="text">
+            </p> <!-- Fecha o parágrafo do início -->
+          </div> <!-- Fecha o bloco Início -->
+          <div class="act"> <!-- Bloco 2: meio -->
+            <h3 class="act__label">🕸️ Meio</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do meio do filme -->
               Se sentindo pequeno demais para o posto de "novo Homem de Ferro", Peter entrega
-              a EDITH ao Beck... que é uma <strong>fraude completa</strong>: ex-funcionário
+              a EDITH ao Beck... que é uma <strong>fraude completa</strong>: ex-funcionário <!-- Destaque para a revelação da farsa -->
               da Stark usando drones e ilusões. É aqui que a <strong>MJ descobre a identidade
-              do Peter</strong> <em>(finalmente!)</em> — e o Mysterio prende Peter num pesadelo
+              do Peter</strong> <em>(finalmente!)</em> — e o Mysterio prende Peter num pesadelo <!-- Destaque para o momento-chave do casal -->
               de ilusões e o joga na frente de um trem. 😵
-            </p>
-          </div>
-          <div class="act">
-            <h3 class="act__label">🕸️ Fim</h3>
-            <p class="text">
+            </p> <!-- Fecha o parágrafo do meio -->
+          </div> <!-- Fecha o bloco Meio -->
+          <div class="act"> <!-- Bloco 3: fim -->
+            <h3 class="act__label">🕸️ Fim</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do final do filme -->
               Peter reencontra seu instinto (o famoso "formigamento"), atravessa as ilusões
-              em Londres, recupera a EDITH e <strong>fica com a MJ</strong> — beijo na ponte
+              em Londres, recupera a EDITH e <strong>fica com a MJ</strong> — beijo na ponte <!-- Destaque para o final feliz do casal -->
               e balanço romântico por Nova York. 💋 Mas na cena final, o
-              <strong>J. Jonah Jameson</strong> exibe um vídeo forjado pelo Mysterio:
+              <strong>J. Jonah Jameson</strong> exibe um vídeo forjado pelo Mysterio: <!-- Destaque para quem solta a bomba -->
               o mundo inteiro descobre que Peter Parker é o Homem-Aranha. 📰
-            </p>
-          </div>
-        </div>
+            </p> <!-- Fecha o parágrafo do fim -->
+          </div> <!-- Fecha o bloco Fim -->
+        </div> <!-- Fecha o container dos três atos -->
 
-        <div class="video-box">
-          <p class="video-box__label">🎬 Clipe (dublado): O beijo de Peter e MJ ou as ilusões do Mysterio</p>
+        <div class="video-box"> <!-- Caixa do vídeo deste slide -->
+          <p class="video-box__label">🎬 Clipe (dublado): O beijo de Peter e MJ ou as ilusões do Mysterio</p> <!-- Rótulo da cena sugerida -->
           <!--
             Cole aqui o iframe do YouTube (versão DUBLADA em PT-BR), usando data-src.
           -->
-          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div>
-        </div>
-      </div>
-    </section>
+          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div> <!-- Retângulo temporário no lugar do vídeo -->
+        </div> <!-- Fecha a caixa de vídeo -->
+      </div> <!-- Fecha a coluna de conteúdo -->
+    </section> <!-- Fecha o slide 3 -->
 
     <!-- ============================================================
-         SLIDE 4 — HOMEM-ARANHA: SEM VOLTA PARA CASA (2021)
+         SLIDE 4 : HOMEM-ARANHA: SEM VOLTA PARA CASA (2021)
          ============================================================ -->
-    <section class="slide" id="slide-4" data-slide="4">
-      <div class="slide__bg" data-bg="nowayhome">
+    <section class="slide" id="slide-4" data-slide="4"> <!-- Slide do terceiro filme -->
+      <div class="slide__bg" data-bg="nowayhome"> <!-- Fundo deste slide; identificado por data-bg="nowayhome" -->
         <!-- Substitua pela imagem: os três Aranhas juntos / feitiço do Doutor Estranho -->
-        <div class="bg-placeholder">📸 Imagem: Os três Homens-Aranha juntos ou o feitiço do Doutor Estranho</div>
-      </div>
-      <div class="slide__overlay"></div>
+        <div class="bg-placeholder">📸 Imagem: Os três Homens-Aranha juntos ou o feitiço do Doutor Estranho</div> <!-- Aviso temporário até a imagem real -->
+      </div> <!-- Fecha o fundo -->
+      <div class="slide__overlay"></div> <!-- Camada de escurecimento para leitura -->
 
-      <div class="slide__content">
-        <p class="eyebrow">Filme 3 • 2021</p>
-        <h2 class="title">Homem-Aranha:<br><span class="title__accent">Sem Volta para Casa</span></h2>
+      <div class="slide__content"> <!-- Coluna de conteúdo do slide -->
+        <p class="eyebrow">Filme 3 • 2021</p> <!-- Etiqueta com número e ano -->
+        <h2 class="title">Homem-Aranha:<br><span class="title__accent">Sem Volta para Casa</span></h2> <!-- Título do slide com o subtítulo em vermelho -->
 
-        <div class="acts">
-          <div class="act">
-            <h3 class="act__label">🕸️ Início</h3>
-            <p class="text">
+        <div class="acts"> <!-- Os três blocos da história deste filme -->
+          <div class="act"> <!-- Bloco 1: início -->
+            <h3 class="act__label">🕸️ Início</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do início do filme -->
               Com a identidade exposta, a vida de Peter vira um caos — e MJ e Ned são
-              <strong>rejeitados no MIT</strong> por tabela. Para consertar isso, Peter pede
-              ao <strong>Doutor Estranho</strong> um feitiço para todos esquecerem seu segredo.
+              <strong>rejeitados no MIT</strong> por tabela. Para consertar isso, Peter pede <!-- Destaque para a consequência que motiva o filme -->
+              ao <strong>Doutor Estranho</strong> um feitiço para todos esquecerem seu segredo. <!-- Destaque para o aliado mágico -->
               Só que ele muda o feitiço tantas vezes que o encanto vaza 🌀 e atrai do
               multiverso quem já sabia: <strong>Duende Verde, Doutor Octopus, Electro,
-              Homem-Areia e Lagarto</strong>.
-            </p>
-          </div>
-          <div class="act">
-            <h3 class="act__label">🕸️ Meio</h3>
-            <p class="text">
+              Homem-Areia e Lagarto</strong>. <!-- Destaque para a lista dos cinco vilões que chegam -->
+            </p> <!-- Fecha o parágrafo do início -->
+          </div> <!-- Fecha o bloco Início -->
+          <div class="act"> <!-- Bloco 2: meio -->
+            <h3 class="act__label">🕸️ Meio</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do meio do filme -->
               Em vez de devolver os vilões para morrer em seus universos, Peter escolhe
-              <strong>curá-los</strong> — ideia da Tia May. Mas o Duende Verde trai a todos, e
-              a <strong>Tia May morre</strong> deixando a lição eterna: <strong>“Com grandes
+              <strong>curá-los</strong> — ideia da Tia May. Mas o Duende Verde trai a todos, e <!-- Destaque para a escolha heroica do Peter -->
+              a <strong>Tia May morre</strong> deixando a lição eterna: <strong>“Com grandes <!-- Destaque para o momento mais triste -->
               poderes vêm grandes responsabilidades.”</strong> 💔 No fundo do poço, Ned abre
-              portais por acidente... e de lá saem <strong>Tobey e Andrew</strong>, os outros
-              Peter Parker! <em>(O surto coletivo no cinema!)</em>
-            </p>
-          </div>
-          <div class="act">
-            <h3 class="act__label">🕸️ Fim</h3>
-            <p class="text">
+              portais por acidente... e de lá saem <strong>Tobey e Andrew</strong>, os outros <!-- Destaque para a chegada dos outros dois Aranhas -->
+              Peter Parker! <em>(O surto coletivo no cinema!)</em> <!-- Comentário divertido em itálico -->
+            </p> <!-- Fecha o parágrafo do meio -->
+          </div> <!-- Fecha o bloco Meio -->
+          <div class="act"> <!-- Bloco 3: fim -->
+            <h3 class="act__label">🕸️ Fim</h3> <!-- Rótulo do bloco -->
+            <p class="text"> <!-- Resumo do final do filme -->
               Os três Aranhas curam todos os vilões na Estátua da Liberdade — e Andrew salva
               a MJ da queda, redimindo sua maior dor. Para impedir o colapso do multiverso,
               Peter toma a decisão mais dura: um feitiço definitivo em que
-              <strong>o mundo inteiro esquece que Peter Parker existe</strong>. Inclusive a
+              <strong>o mundo inteiro esquece que Peter Parker existe</strong>. Inclusive a <!-- Destaque para o sacrifício final -->
               MJ e o Ned. Ele recomeça sozinho, num apartamento vazio, com um traje costurado
               à mão. 💔
-            </p>
-          </div>
-        </div>
+            </p> <!-- Fecha o parágrafo do fim -->
+          </div> <!-- Fecha o bloco Fim -->
+        </div> <!-- Fecha o container dos três atos -->
 
-        <div class="video-box">
-          <p class="video-box__label">🎬 Clipe (dublado): A despedida da MJ ou o abraço dos três Aranhas</p>
+        <div class="video-box"> <!-- Caixa do vídeo deste slide -->
+          <p class="video-box__label">🎬 Clipe (dublado): A despedida da MJ ou o abraço dos três Aranhas</p> <!-- Rótulo da cena sugerida -->
           <!--
             Cole aqui o iframe do YouTube (versão DUBLADA em PT-BR), usando data-src.
           -->
-          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div>
-        </div>
-      </div>
-    </section>
+          <div class="video-box__placeholder">▶️ Espaço reservado para o vídeo (veja assets/links_imagens.txt)</div> <!-- Retângulo temporário no lugar do vídeo -->
+        </div> <!-- Fecha a caixa de vídeo -->
+      </div> <!-- Fecha a coluna de conteúdo -->
+    </section> <!-- Fecha o slide 4 -->
 
     <!-- ============================================================
-         SLIDE 5 — O FUTURO: SPIDER-MAN: BRAND NEW DAY
+         SLIDE 5 : O FUTURO: SPIDER-MAN: BRAND NEW DAY
          ============================================================ -->
-    <section class="slide slide--finale" id="slide-5" data-slide="5">
-      <div class="slide__bg" data-bg="brandnewday">
+    <section class="slide slide--finale" id="slide-5" data-slide="5"> <!-- Último slide; a classe "--finale" permite estilizações exclusivas do encerramento -->
+      <div class="slide__bg" data-bg="brandnewday"> <!-- Fundo deste slide; identificado por data-bg="brandnewday" -->
         <!-- Substitua pela imagem: traje clássico balançando na neve (final do 3º filme) -->
-        <div class="bg-placeholder">📸 Imagem: Peter com o traje clássico balançando na neve</div>
-      </div>
-      <div class="slide__overlay slide__overlay--dark"></div>
+        <div class="bg-placeholder">📸 Imagem: Peter com o traje clássico balançando na neve</div> <!-- Aviso temporário até a imagem real -->
+      </div> <!-- Fecha o fundo -->
+      <div class="slide__overlay slide__overlay--dark"></div> <!-- Versão MAIS ESCURA do overlay: clima dramático para o final -->
 
-      <div class="slide__content">
-        <p class="eyebrow">O Futuro • Em breve nos cinemas</p>
-        <h2 class="title">Spider-Man:<br><span class="title__accent">Brand New Day</span></h2>
-        <p class="text">
-          Onde estamos agora? <strong>Peter está completamente sozinho.</strong>
+      <div class="slide__content"> <!-- Coluna de conteúdo do slide -->
+        <p class="eyebrow">O Futuro • Em breve nos cinemas</p> <!-- Etiqueta indicando que este é o filme que vem aí -->
+        <h2 class="title">Spider-Man:<br><span class="title__accent">Brand New Day</span></h2> <!-- Título com o nome do novo filme em vermelho -->
+        <p class="text"> <!-- Parágrafo que situa onde a história parou -->
+          Onde estamos agora? <strong>Peter está completamente sozinho.</strong> <!-- Destaque para a situação atual do Peter -->
           Nenhuma tecnologia Stark, nenhum Vingador para salvar o dia, e a MJ
           não se lembra dele. É um recomeço do zero — o verdadeiro
-          <strong>“Amigão da Vizinhança”</strong>. 🏙️
-        </p>
-        <p class="text text--highlight">
+          <strong>“Amigão da Vizinhança”</strong>. 🏙️ <!-- Destaque para o apelido clássico -->
+        </p> <!-- Fecha o parágrafo de contexto -->
+        <p class="text text--highlight"> <!-- Parágrafo com barra vermelha lateral: as expectativas para o novo filme -->
           O que esperar? Um Peter mais maduro, um traje clássico dos quadrinhos,
           novos vilões das ruas de Nova York... e, quem sabe, um reencontro que
           vai fazer a gente chorar de novo. 🥹
-        </p>
-        <button class="btn btn--pulse btn--finale" id="finaleBtn" type="button">
+        </p> <!-- Fecha o parágrafo de expectativas -->
+        <button class="btn btn--pulse btn--finale" id="finaleBtn" type="button"> <!-- Botão final pulsante; o id "finaleBtn" é usado pelo JS para a surpresa do clique -->
           Estou pronta para o cinema! 🍿
-        </button>
-      </div>
-    </section>
+        </button> <!-- Fecha o botão final -->
+      </div> <!-- Fecha a coluna de conteúdo -->
+    </section> <!-- Fecha o slide 5 -->
 
-  </main>
+  </main> <!-- Fecha o container de todos os slides -->
 
   <!-- ============================================================
-       NAVEGAÇÃO
+       NAVEGAÇÃO (fica fora do <main> porque flutua sobre TODOS os slides)
        ============================================================ -->
-  <button class="nav-arrow nav-arrow--prev" id="prevBtn" type="button" aria-label="Slide anterior">&#10094;</button>
-  <button class="nav-arrow nav-arrow--next" id="nextBtn" type="button" aria-label="Próximo slide">&#10095;</button>
+  <button class="nav-arrow nav-arrow--prev" id="prevBtn" type="button" aria-label="Slide anterior">&#10094;</button> <!-- Seta esquerda flutuante; &#10094; é o símbolo ❮; aria-label descreve o botão para leitores de tela -->
+  <button class="nav-arrow nav-arrow--next" id="nextBtn" type="button" aria-label="Próximo slide">&#10095;</button> <!-- Seta direita flutuante; &#10095; é o símbolo ❯ -->
 
-  <nav class="dots" id="dots" aria-label="Navegação dos slides"></nav>
+  <nav class="dots" id="dots" aria-label="Navegação dos slides"></nav> <!-- Container vazio das bolinhas indicadoras; o JavaScript cria uma bolinha por slide aqui dentro -->
 
-  <script src="js/script.js"></script>
-</body>
-</html>
+  <script src="js/script.js"></script> <!-- Carrega o JavaScript por último, quando todo o HTML acima já existe (evita erros de "elemento não encontrado") -->
+</body> <!-- Fecha o corpo da página -->
+</html> <!-- Fecha o documento HTML -->

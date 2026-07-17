@@ -1,172 +1,189 @@
 /* ============================================================
    TEMA: Homem-Aranha — Vermelho vibrante, Azul profundo,
    Branco e Preto/Cinza escuro para contraste.
+   Cada linha está comentada explicando o que faz.
    ============================================================ */
 
+/* :root = o elemento raiz da página. Variáveis criadas aqui podem ser usadas em qualquer lugar do CSS com var(--nome) */
 :root {
-  --spider-red: #e62429;
-  --spider-red-dark: #a4161a;
-  --spider-blue: #0b1e5b;
-  --spider-blue-deep: #060f2e;
-  --white: #ffffff;
-  --gray-dark: #14141b;
-  --gray-mid: #2a2a35;
+  --spider-red: #e62429;                     /* Vermelho oficial do Homem-Aranha — cor principal de destaque */
+  --spider-red-dark: #a4161a;                /* Vermelho mais escuro — usado em degradês e sombras dos botões */
+  --spider-blue: #0b1e5b;                    /* Azul profundo do uniforme — cor secundária */
+  --spider-blue-deep: #060f2e;               /* Azul quase preto — usado nos fundos dos slides */
+  --white: #ffffff;                          /* Branco puro — textos principais */
+  --gray-dark: #14141b;                      /* Cinza bem escuro — cor de fundo geral da página */
+  --gray-mid: #2a2a35;                       /* Cinza médio — reservado para detalhes */
 
-  --font-body: 'Montserrat', system-ui, sans-serif;
-  --font-display: 'Bangers', 'Montserrat', cursive;
+  --font-body: 'Montserrat', system-ui, sans-serif;      /* Fonte dos textos: Montserrat; se falhar, usa a fonte do sistema */
+  --font-display: 'Bangers', 'Montserrat', cursive;      /* Fonte dos títulos: Bangers (estilo quadrinhos); se falhar, cai na Montserrat */
 
-  --transition-slide: 700ms cubic-bezier(0.77, 0, 0.175, 1);
+  --transition-slide: 700ms cubic-bezier(0.77, 0, 0.175, 1); /* Duração (700ms) e curva de aceleração da troca de slides — começa rápido e freia suave */
 }
 
 /* ---------- Reset básico ---------- */
+
+/* Seleciona TODOS os elementos da página, incluindo os pseudo-elementos ::before e ::after */
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;                                 /* Zera as margens externas que cada navegador aplica por padrão */
+  padding: 0;                                /* Zera os espaçamentos internos padrão */
+  box-sizing: border-box;                    /* Faz largura/altura já incluírem borda e padding — facilita muito os cálculos de layout */
 }
 
+/* Regras aplicadas à página inteira (html) e ao corpo (body) */
 html,
 body {
-  height: 100%;
-  overflow: hidden; /* cada slide ocupa a tela inteira; sem scroll da página */
+  height: 100%;                              /* Faz a página ocupar 100% da altura da janela */
+  overflow: hidden;                          /* Esconde a barra de rolagem da página — cada slide ocupa a tela inteira, sem scroll geral */
 }
 
+/* Regras só do body (o corpo visível da página) */
 body {
-  font-family: var(--font-body);
-  background: var(--gray-dark);
-  color: var(--white);
+  font-family: var(--font-body);             /* Define a Montserrat como fonte padrão de todos os textos */
+  background: var(--gray-dark);              /* Pinta o fundo da página com o cinza escuro */
+  color: var(--white);                       /* Define branco como cor padrão de todos os textos */
 }
 
 /* ============================================================
    ESTRUTURA DOS SLIDES
    ============================================================ */
 
+/* O container que envolve todos os slides */
 .slideshow {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+  position: relative;                        /* Vira o "ponto de referência" para os slides posicionados de forma absoluta dentro dele */
+  width: 100vw;                              /* Largura = 100% da largura da janela (viewport width) */
+  height: 100vh;                             /* Altura = 100% da altura da janela (viewport height) */
 }
 
+/* Cada slide individual (os 5 usam esta regra) */
 .slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  position: absolute;                        /* Tira o slide do fluxo normal — todos ficam empilhados um sobre o outro no mesmo lugar */
+  inset: 0;                                  /* Atalho para top:0, right:0, bottom:0, left:0 — estica o slide para cobrir o container inteiro */
+  width: 100%;                               /* Largura total do container */
+  height: 100vh;                             /* Altura total da janela — requisito do layout de apresentação */
+  display: flex;                             /* Ativa o Flexbox para alinhar o conteúdo interno */
+  align-items: center;                       /* Centraliza o conteúdo VERTICALMENTE dentro do slide */
+  justify-content: flex-start;               /* Alinha o conteúdo à ESQUERDA horizontalmente */
 
-  opacity: 0;
-  transform: translateX(6%) scale(0.98);
-  pointer-events: none;
-  transition: opacity var(--transition-slide), transform var(--transition-slide);
+  opacity: 0;                                /* Slide começa invisível (transparente) */
+  transform: translateX(6%) scale(0.98);     /* Slide começa levemente deslocado para a direita e 2% menor — posição de "espera" para a animação de entrada */
+  pointer-events: none;                      /* Slide invisível não recebe cliques (senão bloquearia o slide visível) */
+  transition: opacity var(--transition-slide), transform var(--transition-slide); /* Anima suavemente a opacidade e o movimento usando a duração/curva definida nas variáveis */
 }
 
+/* O slide que está VISÍVEL no momento (classe controlada pelo JavaScript) */
 .slide.is-active {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  pointer-events: auto;
-  z-index: 1;
+  opacity: 1;                                /* Totalmente visível */
+  transform: translateX(0) scale(1);         /* Volta para a posição e tamanho normais — o movimento daqui até lá cria a animação de entrada */
+  pointer-events: auto;                      /* Volta a aceitar cliques e interações */
+  z-index: 1;                                /* Fica por cima dos slides inativos */
 }
 
-/* Slide saindo pela esquerda (controlado via JS) */
+/* Classe temporária que o JavaScript aplica ao slide que está SAINDO quando avançamos */
 .slide.is-leaving-left {
-  transform: translateX(-6%) scale(0.98);
+  transform: translateX(-6%) scale(0.98);    /* Faz o slide sair deslizando para a ESQUERDA (dá a sensação de "passar página" para frente) */
 }
 
 /* ---------- Fundo do slide ---------- */
+
+/* A camada de fundo de cada slide (onde entra a imagem do filme) */
 .slide__bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--spider-blue-deep);
-  z-index: 0;
+  position: absolute;                        /* Posicionada em relação ao slide */
+  inset: 0;                                  /* Estica para cobrir o slide inteiro */
+  background-size: cover;                    /* A imagem de fundo preenche todo o espaço, cortando as bordas se precisar (nunca distorce) */
+  background-position: center;               /* Mantém o centro da imagem sempre visível */
+  background-color: var(--spider-blue-deep); /* Cor de segurança exibida enquanto a imagem não carrega (ou se não houver imagem) */
+  z-index: 0;                                /* Camada mais baixa do slide — tudo fica por cima dela */
 }
 
 /* Placeholder visível até você trocar pela imagem real */
 .bg-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 2rem 2rem 5rem;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.35);
-  background:
-    radial-gradient(ellipse at 20% 30%, rgba(230, 36, 41, 0.25), transparent 55%),
-    radial-gradient(ellipse at 80% 70%, rgba(11, 30, 91, 0.8), transparent 60%),
-    linear-gradient(160deg, var(--gray-dark), var(--spider-blue-deep));
+  position: absolute;                        /* Posicionado em relação ao fundo do slide */
+  inset: 0;                                  /* Cobre a área inteira do fundo */
+  display: flex;                             /* Flexbox para posicionar o texto interno */
+  align-items: flex-end;                     /* Empurra o texto para a parte de BAIXO (para não brigar com o título do slide) */
+  justify-content: center;                   /* Centraliza o texto horizontalmente */
+  padding: 2rem 2rem 5rem;                   /* Espaço interno: 2rem em cima/lados e 5rem embaixo (afasta o texto da borda inferior) */
+  text-align: center;                        /* Centraliza as linhas do texto */
+  font-size: 1rem;                           /* Tamanho da letra do aviso */
+  font-weight: 600;                          /* Peso semi-negrito */
+  color: rgba(255, 255, 255, 0.35);          /* Branco com 35% de opacidade — discreto, é só um lembrete */
+  background:                                /* Fundo decorativo temporário feito só com degradês (sem imagem): */
+    radial-gradient(ellipse at 20% 30%, rgba(230, 36, 41, 0.25), transparent 55%),  /* Mancha avermelhada difusa no canto superior esquerdo */
+    radial-gradient(ellipse at 80% 70%, rgba(11, 30, 91, 0.8), transparent 60%),    /* Mancha azulada difusa no canto inferior direito */
+    linear-gradient(160deg, var(--gray-dark), var(--spider-blue-deep));             /* Base em degradê diagonal do cinza escuro para o azul profundo */
 }
 
 /* Overlay para garantir a leitura do texto sobre a imagem */
 .slide__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    100deg,
-    rgba(6, 15, 46, 0.92) 0%,
-    rgba(6, 15, 46, 0.7) 45%,
-    rgba(230, 36, 41, 0.25) 100%
+  position: absolute;                        /* Posicionado em relação ao slide */
+  inset: 0;                                  /* Cobre o slide inteiro */
+  z-index: 1;                                /* Fica ACIMA da imagem de fundo e ABAIXO do texto */
+  background: linear-gradient(               /* Degradê diagonal que escurece a imagem: */
+    100deg,                                  /* Direção do degradê: quase horizontal, levemente inclinado */
+    rgba(6, 15, 46, 0.92) 0%,                /* Esquerda: azul bem escuro e quase opaco (onde fica o texto — máxima legibilidade) */
+    rgba(6, 15, 46, 0.7) 45%,                /* Centro: escurecimento médio */
+    rgba(230, 36, 41, 0.25) 100%             /* Direita: leve véu avermelhado, deixando a imagem mais visível */
   );
 }
 
+/* Versão mais escura do overlay, usada no slide final (clima mais dramático) */
 .slide__overlay--dark {
-  background: linear-gradient(
-    100deg,
-    rgba(0, 0, 0, 0.92) 0%,
-    rgba(6, 15, 46, 0.8) 55%,
-    rgba(230, 36, 41, 0.3) 100%
+  background: linear-gradient(               /* Mesmo conceito do overlay normal, porém: */
+    100deg,                                  /* Mesma direção diagonal */
+    rgba(0, 0, 0, 0.92) 0%,                  /* Esquerda: PRETO quase opaco (em vez de azul) */
+    rgba(6, 15, 46, 0.8) 55%,                /* Centro: azul escuro mais fechado */
+    rgba(230, 36, 41, 0.3) 100%              /* Direita: véu vermelho um pouco mais forte */
   );
 }
 
 /* ---------- Conteúdo ---------- */
+
+/* A coluna de texto de cada slide (título, parágrafos, vídeo, botão) */
 .slide__content {
-  position: relative;
-  z-index: 2;
-  max-width: 720px;
-  max-height: 100vh;
-  overflow-y: auto; /* se o conteúdo passar da tela, rola só dentro do slide */
-  padding: 3rem 3rem 4.5rem 6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--spider-red) transparent;
+  position: relative;                        /* Necessário para o z-index funcionar */
+  z-index: 2;                                /* Fica ACIMA do fundo e do overlay — é a camada que a gente lê */
+  max-width: 720px;                          /* Limita a largura da coluna de texto (linhas muito longas cansam a leitura) */
+  max-height: 100vh;                         /* A coluna nunca passa da altura da tela */
+  overflow-y: auto;                          /* Se o conteúdo for maior que a tela, cria rolagem SÓ dentro da coluna (o slide continua fixo) */
+  padding: 3rem 3rem 4.5rem 6rem;            /* Espaço interno: 3rem topo, 3rem direita, 4.5rem baixo (afasta das bolinhas), 6rem esquerda (afasta da seta) */
+  display: flex;                             /* Flexbox para organizar os filhos */
+  flex-direction: column;                    /* Empilha os elementos um embaixo do outro */
+  gap: 1.2rem;                               /* Espaço automático de 1.2rem entre cada elemento empilhado */
+  scrollbar-width: thin;                     /* Deixa a barra de rolagem fininha (Firefox) */
+  scrollbar-color: var(--spider-red) transparent; /* Barra de rolagem vermelha com trilho invisível (Firefox) */
 }
 
+/* Variação usada na CAPA: conteúdo centralizado na tela */
 .slide__content--center {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  align-items: center;
+  max-width: 820px;                          /* Coluna um pouco mais larga que a padrão */
+  margin: 0 auto;                            /* "auto" nas laterais centraliza a coluna horizontalmente */
+  padding: 2rem;                             /* Espaçamento interno menor e uniforme */
+  text-align: center;                        /* Centraliza todas as linhas de texto */
+  align-items: center;                       /* Centraliza os elementos flex (título, botão...) na horizontal */
 }
 
-/* Animação de entrada do conteúdo, disparada quando o slide ativa */
+/* Animação de entrada: cada elemento do conteúdo "sobe" quando o slide ativa */
 .slide.is-active .slide__content > * {
-  animation: rise-in 700ms both;
+  animation: rise-in 700ms both;             /* Aplica a animação rise-in por 700ms; "both" mantém o estado inicial antes e o final depois */
 }
 
-.slide.is-active .slide__content > *:nth-child(2) { animation-delay: 120ms; }
-.slide.is-active .slide__content > *:nth-child(3) { animation-delay: 240ms; }
-.slide.is-active .slide__content > *:nth-child(4) { animation-delay: 360ms; }
-.slide.is-active .slide__content > *:nth-child(5) { animation-delay: 480ms; }
+/* Efeito cascata: cada filho começa um pouquinho depois do anterior */
+.slide.is-active .slide__content > *:nth-child(2) { animation-delay: 120ms; } /* 2º elemento espera 120ms para começar */
+.slide.is-active .slide__content > *:nth-child(3) { animation-delay: 240ms; } /* 3º elemento espera 240ms */
+.slide.is-active .slide__content > *:nth-child(4) { animation-delay: 360ms; } /* 4º elemento espera 360ms */
+.slide.is-active .slide__content > *:nth-child(5) { animation-delay: 480ms; } /* 5º elemento espera 480ms */
 
+/* Definição da animação rise-in usada acima */
 @keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+  from {                                     /* Estado INICIAL da animação: */
+    opacity: 0;                              /* Invisível */
+    transform: translateY(24px);             /* 24 pixels abaixo da posição final */
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  to {                                       /* Estado FINAL da animação: */
+    opacity: 1;                              /* Totalmente visível */
+    transform: translateY(0);                /* Na posição normal — o caminho entre os dois estados cria o efeito de "subir aparecendo" */
   }
 }
 
@@ -174,157 +191,177 @@ body {
    TIPOGRAFIA
    ============================================================ */
 
+/* O rotulozinho em maiúsculas acima do título (ex.: "FILME 1 • 2017") */
 .eyebrow {
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--spider-red);
+  font-size: 0.85rem;                        /* Letra pequena */
+  font-weight: 800;                          /* Bem negrito */
+  letter-spacing: 0.25em;                    /* Espaço grande entre as letras — efeito de "etiqueta" */
+  text-transform: uppercase;                 /* Força tudo em MAIÚSCULAS */
+  color: var(--spider-red);                  /* Vermelho do Homem-Aranha */
 }
 
+/* Título principal de cada slide */
 .title {
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+  font-family: var(--font-display);          /* Usa a fonte Bangers (estilo quadrinhos) */
+  font-size: clamp(2.6rem, 6vw, 4.5rem);     /* Tamanho fluido: nunca menor que 2.6rem, nunca maior que 4.5rem, e no meio acompanha 6% da largura da tela */
+  line-height: 1.05;                         /* Linhas bem coladas — visual de cartaz */
+  letter-spacing: 0.02em;                    /* Espacinho sutil entre letras */
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45); /* Sombra dura deslocada 4px — efeito de letra de gibi */
 }
 
+/* Versão maior do título, usada só na capa */
 .title--hero {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(3rem, 8vw, 6rem);         /* Mesma lógica fluida, porém com limites maiores (até 6rem) */
 }
 
+/* A parte destacada do título (ex.: "De Volta ao Lar") */
 .title__accent {
-  color: var(--spider-red);
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  color: var(--spider-red);                  /* Pinta essa parte de vermelho */
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15); /* Contorno branco sutil ao redor das letras (efeito quadrinhos) */
 }
 
+/* Subtítulo da capa */
 .subtitle {
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  font-weight: 600;
-  max-width: 40ch;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);   /* Tamanho fluido entre 1.05rem e 1.35rem */
+  font-weight: 600;                          /* Semi-negrito */
+  max-width: 40ch;                           /* Largura máxima de ~40 caracteres por linha (boa leitura) */
+  color: rgba(255, 255, 255, 0.9);           /* Branco com 90% de opacidade — um tiquinho mais suave que o título */
 }
 
+/* Parágrafos de texto corrido dos slides */
 .text {
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);    /* Tamanho fluido entre 1rem e 1.15rem */
+  line-height: 1.7;                          /* Bastante espaço entre linhas — leitura confortável */
+  color: rgba(255, 255, 255, 0.92);          /* Branco levemente suavizado */
 }
 
+/* Palavras em <strong> dentro dos textos */
 .text strong {
-  color: #ffb3b5;
+  color: #ffb3b5;                            /* Rosa-avermelhado claro — destaca nomes e frases importantes sem perder a leitura */
 }
 
 /* ---------- Blocos de Início / Meio / Fim ---------- */
 
+/* O container que agrupa os três blocos de ato de cada filme */
 .acts {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: flex;                             /* Flexbox para organizar os blocos */
+  flex-direction: column;                    /* Um bloco embaixo do outro */
+  gap: 1rem;                                 /* 1rem de respiro entre cada bloco */
 }
 
+/* Cada bloco individual (Início, Meio ou Fim) */
 .act {
-  border-left: 4px solid var(--spider-red);
-  border-radius: 0 12px 12px 0;
-  background: rgba(0, 0, 0, 0.35);
-  padding: 0.9rem 1.2rem;
-  backdrop-filter: blur(3px);
+  border-left: 4px solid var(--spider-red);  /* Barra vermelha vertical na esquerda — marca visual de "capítulo" */
+  border-radius: 0 12px 12px 0;              /* Cantos arredondados só do lado direito (o esquerdo fica reto, colado na barra) */
+  background: rgba(0, 0, 0, 0.35);           /* Fundo preto semitransparente — destaca o bloco sobre a imagem */
+  padding: 0.9rem 1.2rem;                    /* Espaço interno: 0.9rem em cima/baixo, 1.2rem nos lados */
+  backdrop-filter: blur(3px);                /* Desfoca levemente o que está atrás do bloco — efeito "vidro fosco" */
 }
 
+/* O rótulo de cada bloco ("🕸️ INÍCIO", "🕸️ MEIO", "🕸️ FIM") */
 .act__label {
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--spider-red);
-  margin-bottom: 0.4rem;
+  font-size: 0.8rem;                         /* Letra pequena */
+  font-weight: 800;                          /* Bem negrito */
+  letter-spacing: 0.2em;                     /* Letras espaçadas — mesmo efeito de etiqueta do .eyebrow */
+  text-transform: uppercase;                 /* Tudo em MAIÚSCULAS */
+  color: var(--spider-red);                  /* Vermelho de destaque */
+  margin-bottom: 0.4rem;                     /* Pequeno espaço entre o rótulo e o texto do ato */
 }
 
+/* O texto dentro dos blocos de ato (um pouco menor que o texto normal) */
 .act .text {
-  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
-  line-height: 1.6;
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem); /* Tamanho fluido levemente reduzido — cabe mais história na tela */
+  line-height: 1.6;                          /* Espaço entre linhas um pouco menor que o padrão */
 }
 
+/* Parágrafo especial com destaque (usado no slide final) */
 .text--highlight {
-  border-left: 4px solid var(--spider-red);
-  padding-left: 1rem;
-  font-weight: 600;
+  border-left: 4px solid var(--spider-red);  /* Barra vermelha na esquerda, igual aos blocos de ato */
+  padding-left: 1rem;                        /* Afasta o texto da barra */
+  font-weight: 600;                          /* Semi-negrito para chamar atenção */
 }
 
 /* ============================================================
    BOTÕES
    ============================================================ */
 
+/* Estilo base dos botões ("Começar a Aventura" e "Estou pronta para o cinema!") */
 .btn {
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--white);
-  background: linear-gradient(135deg, var(--spider-red), var(--spider-red-dark));
-  border: none;
-  border-radius: 999px;
-  padding: 1rem 2.4rem;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(230, 36, 41, 0.45);
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  font-family: var(--font-body);             /* Usa a Montserrat (não a fonte de quadrinhos) */
+  font-weight: 800;                          /* Bem negrito */
+  font-size: 1.05rem;                        /* Letra um pouco maior que o texto normal */
+  color: var(--white);                       /* Texto branco */
+  background: linear-gradient(135deg, var(--spider-red), var(--spider-red-dark)); /* Degradê diagonal do vermelho vivo para o vermelho escuro */
+  border: none;                              /* Remove a borda padrão dos botões */
+  border-radius: 999px;                      /* Valor altíssimo = cantos totalmente redondos (formato pílula) */
+  padding: 1rem 2.4rem;                      /* Espaço interno generoso: 1rem vertical, 2.4rem horizontal */
+  cursor: pointer;                           /* Cursor vira mãozinha ao passar por cima */
+  box-shadow: 0 8px 24px rgba(230, 36, 41, 0.45); /* Sombra vermelha difusa embaixo — o botão parece "flutuar" com brilho */
+  transition: transform 200ms ease, box-shadow 200ms ease; /* Anima suavemente o movimento e a sombra no hover */
 }
 
+/* Efeito quando o mouse passa por cima do botão */
 .btn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(230, 36, 41, 0.6);
+  transform: translateY(-3px) scale(1.03);   /* Sobe 3px e cresce 3% — sensação de botão "vivo" */
+  box-shadow: 0 12px 32px rgba(230, 36, 41, 0.6); /* Sombra maior e mais intensa, acompanhando a subida */
 }
 
+/* Modificador que faz o botão pulsar continuamente */
 .btn--pulse {
-  animation: pulse 1.8s ease-in-out infinite;
+  animation: pulse 1.8s ease-in-out infinite; /* Roda a animação "pulse" a cada 1.8s, para sempre, com aceleração suave */
 }
 
+/* Definição da animação de pulso */
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 36, 41, 0.55); }
-  50%      { box-shadow: 0 0 0 18px rgba(230, 36, 41, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 36, 41, 0.55); }  /* Início e fim: um "anel" vermelho colado no botão */
+  50%      { box-shadow: 0 0 0 18px rgba(230, 36, 41, 0); }  /* Meio: o anel se expande 18px e fica transparente — efeito de onda de radar */
 }
 
 /* ============================================================
    VÍDEOS (iframes do YouTube dublados)
    ============================================================ */
 
+/* A caixa que envolve cada vídeo (moldura + rótulo) */
 .video-box {
-  margin-top: 0.4rem;
-  border-radius: 14px;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(4px);
+  margin-top: 0.4rem;                        /* Pequeno respiro acima da caixa */
+  border-radius: 14px;                       /* Cantos arredondados */
+  overflow: hidden;                          /* Corta qualquer conteúdo que passe dos cantos arredondados (o vídeo respeita a moldura) */
+  background: rgba(0, 0, 0, 0.55);           /* Fundo preto semitransparente */
+  border: 1px solid rgba(255, 255, 255, 0.12); /* Borda branca bem sutil delimitando a caixa */
+  backdrop-filter: blur(4px);                /* Desfoque do fundo atrás da caixa — efeito vidro */
 }
 
+/* O rótulo acima do vídeo ("🎬 Clipe (dublado): ...") */
 .video-box__label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.7rem 1rem;
-  color: rgba(255, 255, 255, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;                        /* Letra pequena */
+  font-weight: 600;                          /* Semi-negrito */
+  padding: 0.7rem 1rem;                      /* Espaço interno do rótulo */
+  color: rgba(255, 255, 255, 0.85);          /* Branco suave */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linha fininha separando o rótulo da área do vídeo */
 }
 
+/* Regras compartilhadas entre o iframe real e o placeholder */
 .video-box__frame,
 .video-box__placeholder {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: none;
+  display: block;                            /* Remove o espacinho fantasma que elementos inline deixam embaixo */
+  width: 100%;                               /* Ocupa toda a largura da caixa */
+  aspect-ratio: 16 / 9;                      /* Mantém sempre a proporção de vídeo widescreen (16:9), em qualquer largura */
+  border: none;                              /* Remove a borda padrão dos iframes */
 }
 
+/* O retângulo temporário exibido enquanto não há vídeo */
 .video-box__placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.4);
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.03) 12px,
-    transparent 12px,
-    transparent 24px
+  display: flex;                             /* Flexbox para centralizar o texto interno */
+  align-items: center;                       /* Centraliza verticalmente */
+  justify-content: center;                   /* Centraliza horizontalmente */
+  font-weight: 600;                          /* Semi-negrito */
+  color: rgba(255, 255, 255, 0.4);           /* Branco discreto (40%) */
+  background: repeating-linear-gradient(     /* Fundo listrado diagonal (padrão de "área reservada"): */
+    45deg,                                   /* Listras a 45 graus */
+    rgba(255, 255, 255, 0.03),               /* Cor da listra clara (branco a 3%) */
+    rgba(255, 255, 255, 0.03) 12px,          /* A listra clara dura 12px */
+    transparent 12px,                        /* Depois vira transparente... */
+    transparent 24px                         /* ...por mais 12px, e o padrão se repete */
   );
 }
 
@@ -332,142 +369,161 @@ body {
    NAVEGAÇÃO — setas flutuantes e indicadores
    ============================================================ */
 
+/* Estilo base das duas setas laterais */
 .nav-arrow {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
+  position: fixed;                           /* Fixa na TELA (não no slide) — as setas ficam paradas enquanto os slides trocam */
+  top: 50%;                                  /* Borda superior na metade da tela */
+  transform: translateY(-50%);               /* Sobe metade da própria altura — centralização vertical perfeita */
+  z-index: 10;                               /* Camada alta — fica por cima de todos os slides */
 
-  width: 3.2rem;
-  height: 3.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 3.2rem;                             /* Largura do círculo da seta */
+  height: 3.2rem;                            /* Altura igual à largura (círculo perfeito) */
+  display: flex;                             /* Flexbox para centralizar o símbolo ❮ ❯ */
+  align-items: center;                       /* Centraliza o símbolo verticalmente */
+  justify-content: center;                   /* Centraliza o símbolo horizontalmente */
 
-  font-size: 1.3rem;
-  color: var(--white);
-  background: rgba(230, 36, 41, 0.85);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 200ms ease, transform 200ms ease, opacity 200ms ease;
+  font-size: 1.3rem;                         /* Tamanho do símbolo da seta */
+  color: var(--white);                       /* Símbolo branco */
+  background: rgba(230, 36, 41, 0.85);       /* Fundo vermelho com leve transparência */
+  border: 2px solid rgba(255, 255, 255, 0.25); /* Anel branco sutil ao redor */
+  border-radius: 50%;                        /* 50% transforma o quadrado em círculo */
+  cursor: pointer;                           /* Mãozinha ao passar o mouse */
+  transition: background 200ms ease, transform 200ms ease, opacity 200ms ease; /* Anima cor, tamanho e transparência suavemente */
 }
 
+/* Efeito das setas ao passar o mouse */
 .nav-arrow:hover {
-  background: var(--spider-red);
-  transform: translateY(-50%) scale(1.12);
+  background: var(--spider-red);             /* Vermelho fica sólido (sem transparência) */
+  transform: translateY(-50%) scale(1.12);   /* Mantém a centralização vertical E cresce 12% */
 }
 
-.nav-arrow--prev { left: 1.2rem; }
-.nav-arrow--next { right: 1.2rem; }
+.nav-arrow--prev { left: 1.2rem; }           /* Posiciona a seta "anterior" a 1.2rem da borda ESQUERDA da tela */
+.nav-arrow--next { right: 1.2rem; }          /* Posiciona a seta "próximo" a 1.2rem da borda DIREITA da tela */
 
+/* Aparência das setas quando desabilitadas (primeiro/último slide) */
 .nav-arrow[disabled] {
-  opacity: 0.25;
-  cursor: default;
-  pointer-events: none;
+  opacity: 0.25;                             /* Bem apagada — sinaliza que não dá para ir naquela direção */
+  cursor: default;                           /* Cursor normal (sem mãozinha) */
+  pointer-events: none;                      /* Ignora completamente os cliques */
 }
 
 /* Bolinhas indicadoras (uma por slide) */
+
+/* O container das bolinhas, na parte de baixo da tela */
 .dots {
-  position: fixed;
-  bottom: 1.4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  gap: 0.6rem;
+  position: fixed;                           /* Fixo na tela, como as setas */
+  bottom: 1.4rem;                            /* A 1.4rem da borda inferior */
+  left: 50%;                                 /* Borda esquerda na metade da tela... */
+  transform: translateX(-50%);               /* ...e recua metade da própria largura — centralização horizontal perfeita */
+  z-index: 10;                               /* Camada alta, acima dos slides */
+  display: flex;                             /* Bolinhas lado a lado */
+  gap: 0.6rem;                               /* Espacinho entre cada bolinha */
 }
 
+/* Cada bolinha individual (criadas pelo JavaScript) */
 .dots__dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  border: 2px solid var(--white);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: background 250ms ease, transform 250ms ease;
+  width: 0.75rem;                            /* Largura da bolinha */
+  height: 0.75rem;                           /* Altura igual (círculo) */
+  border-radius: 50%;                        /* Arredonda em círculo */
+  border: 2px solid var(--white);            /* Anel branco */
+  background: transparent;                   /* Miolo vazio quando inativa */
+  cursor: pointer;                           /* Mãozinha — as bolinhas são clicáveis */
+  padding: 0;                                /* Remove o padding padrão de <button> */
+  transition: background 250ms ease, transform 250ms ease; /* Anima o preenchimento e o tamanho suavemente */
 }
 
+/* Bolinha ao passar o mouse */
 .dots__dot:hover {
-  transform: scale(1.25);
+  transform: scale(1.25);                    /* Cresce 25% — indica que é clicável */
 }
 
+/* Bolinha do slide ATUAL (classe controlada pelo JavaScript) */
 .dots__dot.is-active {
-  background: var(--spider-red);
-  border-color: var(--spider-red);
-  transform: scale(1.25);
+  background: var(--spider-red);             /* Miolo preenchido de vermelho */
+  border-color: var(--spider-red);           /* Anel também vermelho */
+  transform: scale(1.25);                    /* Fica maior que as outras */
 }
 
 /* ============================================================
    DETALHE DECORATIVO — teias nos cantos
    ============================================================ */
 
+/* Estilo base das duas teias decorativas */
 .web-corner {
-  position: fixed;
-  width: 180px;
-  height: 180px;
-  z-index: 5;
-  pointer-events: none;
-  opacity: 0.18;
-  background:
-    repeating-radial-gradient(circle at 0 0, transparent 0 18px, var(--white) 18px 19px),
-    repeating-conic-gradient(from 0deg at 0 0, var(--white) 0deg 1deg, transparent 1deg 15deg);
+  position: fixed;                           /* Fixas na tela, sempre visíveis */
+  width: 180px;                              /* Largura da área da teia */
+  height: 180px;                             /* Altura da área da teia */
+  z-index: 5;                                /* Acima dos slides, abaixo das setas/bolinhas */
+  pointer-events: none;                      /* Não captura cliques — é só enfeite, tudo "atravessa" ela */
+  opacity: 0.18;                             /* Bem transparente — decoração sutil */
+  background:                                /* A teia é desenhada só com dois degradês repetidos: */
+    repeating-radial-gradient(circle at 0 0, transparent 0 18px, var(--white) 18px 19px),      /* Anéis concêntricos brancos a cada 18px (os "fios circulares" da teia) */
+    repeating-conic-gradient(from 0deg at 0 0, var(--white) 0deg 1deg, transparent 1deg 15deg); /* Linhas radiais a cada 15 graus (os "raios" da teia) */
 }
 
+/* Teia do canto superior esquerdo */
 .web-corner--tl {
-  top: 0;
-  left: 0;
+  top: 0;                                    /* Colada no topo */
+  left: 0;                                   /* Colada na esquerda */
 }
 
+/* Teia do canto inferior direito */
 .web-corner--br {
-  right: 0;
-  bottom: 0;
-  transform: rotate(180deg);
+  right: 0;                                  /* Colada na direita */
+  bottom: 0;                                 /* Colada embaixo */
+  transform: rotate(180deg);                 /* Girada 180° para o desenho "abrir" a partir do canto certo */
 }
 
 /* ============================================================
    RESPONSIVO
    ============================================================ */
 
+/* Regras aplicadas SOMENTE em telas de até 768px de largura (celulares e tablets) */
 @media (max-width: 768px) {
+
+  /* Ajustes na coluna de conteúdo */
   .slide__content {
-    max-width: 100%;
-    padding: 4.5rem 1.4rem 5.5rem;
-    gap: 1rem;
+    max-width: 100%;                         /* Usa a largura inteira da tela (não sobra espaço no celular) */
+    padding: 4.5rem 1.4rem 5.5rem;           /* Padding maior em cima/baixo (afasta das setas e bolinhas) e menor nos lados */
+    gap: 1rem;                               /* Espaço entre elementos um pouco menor */
   }
 
+  /* No celular, o degradê de leitura vira VERTICAL (o texto ocupa a tela toda) */
   .slide__overlay,
   .slide__overlay--dark {
-    background: linear-gradient(
-      180deg,
-      rgba(6, 15, 46, 0.9) 0%,
-      rgba(6, 15, 46, 0.75) 60%,
-      rgba(230, 36, 41, 0.35) 100%
+    background: linear-gradient(             /* Novo degradê: */
+      180deg,                                /* De cima para baixo */
+      rgba(6, 15, 46, 0.9) 0%,               /* Topo: azul escuro quase opaco */
+      rgba(6, 15, 46, 0.75) 60%,             /* Meio: escurecimento médio */
+      rgba(230, 36, 41, 0.35) 100%           /* Base: véu avermelhado */
     );
   }
 
+  /* Setas menores para não roubarem espaço da tela pequena */
   .nav-arrow {
-    width: 2.6rem;
-    height: 2.6rem;
-    font-size: 1.05rem;
+    width: 2.6rem;                           /* Círculo menor */
+    height: 2.6rem;                          /* Altura acompanha */
+    font-size: 1.05rem;                      /* Símbolo menor */
   }
 
-  .nav-arrow--prev { left: 0.5rem; }
-  .nav-arrow--next { right: 0.5rem; }
+  .nav-arrow--prev { left: 0.5rem; }         /* Seta esquerda mais colada na borda */
+  .nav-arrow--next { right: 0.5rem; }        /* Seta direita mais colada na borda */
 
+  /* Teias menores no celular */
   .web-corner {
-    width: 100px;
-    height: 100px;
+    width: 100px;                            /* Reduz a largura da teia */
+    height: 100px;                           /* Reduz a altura da teia */
   }
 }
 
-/* Acessibilidade: respeita quem prefere menos movimento */
+/* Acessibilidade: respeita quem configurou o sistema para reduzir movimento */
 @media (prefers-reduced-motion: reduce) {
+
+  /* Desliga as animações para não causar desconforto (enjoo de movimento) */
   .slide,
   .slide.is-active .slide__content > *,
   .btn--pulse {
-    animation: none !important;
-    transition: opacity 300ms ease !important;
+    animation: none !important;              /* Cancela qualquer animação */
+    transition: opacity 300ms ease !important; /* Mantém só um fade simples e curto na troca de slides */
   }
 }
